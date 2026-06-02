@@ -14,12 +14,36 @@ with st.form("Details"):
 
     if Submit_Button:
         prompt = f"""
-            Give me Questions in {Lang} Language on Topic Name is {Topic}
-            in {Level} level and {Type} type.
+        Act as an expert technical interviewer.
 
-            Follow:
-            Do not give any unnecessary explanation.
-            Give only questions along with their answers.
+        Generate {Level} level interview questions for:
+
+        Programming Language: {Lang}
+        Topic: {Topic}
+        Selected Types: {', '.join(Type)}
+
+        Rules:
+
+        - For MCQ's:
+        * Generate 5 MCQs.
+        * Include 4 options.
+        * Mention the correct answer.
+
+        - For Theory Questions:
+        * Generate 5 interview questions.
+        * Provide clear answers.
+
+        - For Coding Snippets:
+        * Generate 3 coding questions.
+        * Provide complete code solutions.
+        * Explain the logic briefly.
+
+        Format the response neatly using headings:
+        ## MCQ's
+        ## Theory Questions
+        ## Coding Snippets
+
+        Generate only the sections corresponding to the selected types.
         """
 
         response = requests.post(f"{server_url}/questions",json={"prompt": prompt})
