@@ -1,9 +1,7 @@
 import streamlit as st
 import requests
 
-# server_url = st.secrets["backend_url"]
-
-server_url = "https://127.0.0.1:8000"
+server_url = st.secrets["be_url"]
 st.title("AI Interview Chat Bot")
 
 with st.form("Details"):
