@@ -19,7 +19,7 @@ with st.form("Details"):
 
             Follow:
             Do not give any explanation.
-            Give only questions.
+            Give only questions with answers.
         """
 
         response = requests.post(f"{server_url}/questions",json={"prompt": prompt})
