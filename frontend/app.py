@@ -18,8 +18,8 @@ with st.form("Details"):
             in {Level} level and {Type} type.
 
             Follow:
-            Do not give any explanation.
-            Give only questions with answers.
+            Do not give any unnecessary explanation.
+            Give only questions along with their answers.
         """
 
         response = requests.post(f"{server_url}/questions",json={"prompt": prompt})
