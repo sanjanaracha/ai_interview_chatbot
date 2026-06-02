@@ -1,8 +1,9 @@
 import streamlit as st
 import requests
 
-server_url = st.secrets["backend_url"]
+# server_url = st.secrets["backend_url"]
 
+server_url = "https://127.0.0.1:8000"
 st.title("AI Interview Chat Bot")
 
 with st.form("Details"):
@@ -10,7 +11,7 @@ with st.form("Details"):
     Lang = st.text_input("Enter the Language")
     Topic = st.text_input("Enter the Topic")
     Level = st.selectbox("Enter the Level",["Easy", "Medium", "Advanced"])
-    Type = st.selectbox("Enter the Type",["MCQ's", "Theory Questions", "Coding Snippets"])
+    Type = st.multiselect("Enter the Type",["MCQ's", "Theory Questions", "Coding Snippets"])
     Submit_Button = st.form_submit_button("Submit")
 
     if Submit_Button:
@@ -23,7 +24,7 @@ with st.form("Details"):
             Give only questions.
         """
 
-        response = requests.post(server_url,json={"prompt": prompt})
+        response = requests.post(f"{server_url}/questions",json={"prompt": prompt})
         data = response.json()
         if "response" in data:
             st.write(data["response"])
