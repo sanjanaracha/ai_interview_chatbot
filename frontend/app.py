@@ -14,38 +14,30 @@ with st.form("Details"):
 
     if Submit_Button:
         prompt = f"""
-        Act as an expert technical interviewer.
+        if "MCQ's" in Type:
+            prompt += """
+            - Generate 5 MCQ questions.
+            - Provide 4 options (A, B, C, D).
+            - Mention the correct answer.
+            """
 
-        Generate {Level} level interview questions for:
+        if "Theory Questions" in Type:
+            prompt += """
+            - Generate 5 theory/interview questions.
+            - Provide concise and accurate answers.
+            """
 
-        Programming Language: {Lang}
-        Topic: {Topic}
-        Selected Types: {', '.join(Type)}
+        if "Coding Snippets" in Type:
+            prompt += """
+            - Generate 3 coding questions.
+            - Provide complete code solutions.
+            - Briefly explain the logic.
+            """
 
-        Rules:
-
-        - For MCQ's:
-        * Generate 5 MCQs.
-        * Include 4 options.
-        * Mention the correct answer.
-
-        - For Theory Questions:
-        * Generate 5 interview questions.
-        * Provide clear answers.
-
-        - For Coding Snippets:
-        * Generate 3 coding questions.
-        * Provide complete code solutions.
-        * Explain the logic briefly.
-
-        Format the response neatly using headings:
-        ## MCQ's
-        ## Theory Questions
-        ## Coding Snippets
-
-        Generate only the sections corresponding to the selected types.
-        """
-
+            prompt += """
+            Do not generate any question types that were not selected.
+            Format the response neatly with headings for each selected section.
+            """
         response = requests.post(f"{server_url}/questions",json={"prompt": prompt})
         data = response.json()
         if "response" in data:
