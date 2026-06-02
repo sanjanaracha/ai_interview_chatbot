@@ -6,7 +6,7 @@ app = FastAPI()
 
 client = OpenAI(
     api_key=os.getenv("API_KEY"),
-    base_url=os.getenv("BASE_URL")
+    base_url="https://api.groq.com/openai/v1"
 )
 
 
